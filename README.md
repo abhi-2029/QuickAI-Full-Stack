@@ -159,7 +159,7 @@ This project is licensed under the MIT License.
 **Abhishek Ranjan**
 
 * GitHub: [Github](https://github.com/abhi-2029)
-* LinkedIn: [(Linkedin)](https://www.linkedin.com/in/abhishekranjan20/)
+* LinkedIn: [Linkedin](https://www.linkedin.com/in/abhishekranjan20/)
 
 ---
 
