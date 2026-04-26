@@ -33,8 +33,6 @@ Users can:
 
 ---
 
-## 📁 Project Structure
-
 
 ---
 
@@ -144,11 +142,11 @@ Backend Deployment:
 
 Frontend Deployment:
 
-#Create Static Site
-#Root Directory → client
-#Build Command → npm install && npm run build
-#Publish Directory → dist
-#Add frontend environment variables
+- Create Static Site
+- Root Directory → client
+- Build Command → npm install && npm run build
+- Publish Directory → dist
+- Add frontend environment variables
 
 
 
