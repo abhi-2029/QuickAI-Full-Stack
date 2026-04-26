@@ -134,11 +134,11 @@ VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
 
 Backend Deployment:
 
-#Create Web Service
-#Root Directory → server
-#Build Command → npm install
-#Start Command → node server.js
-#Add all backend environment variables
+- Create Web Service
+- Root Directory → server
+- Build Command → npm install
+- Start Command → node server.js
+- Add all backend environment variables
 
 Frontend Deployment:
 
@@ -162,18 +162,18 @@ Frontend Deployment:
 
 ## 🧠 Key Learnings
 
-#Full-stack development using React and Node.js
-#Integration of multiple AI APIs
-#Authentication and user management
-#Database handling with PostgreSQL
-#Real-world deployment using Render
+- Full-stack development using React and Node.js
+- Integration of multiple AI APIs
+- Authentication and user management
+- Database handling with PostgreSQL
+- Real-world deployment using Render
 
 🎯 Future Improvements
 
-#Add more AI tools
-#Improve UI/UX
-#Add user history tracking
-#Optimize performance
+- Add more AI tools
+- Improve UI/UX
+- Add user history tracking
+- Optimize performance
 
 ---
 
