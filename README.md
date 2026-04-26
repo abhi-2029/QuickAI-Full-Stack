@@ -136,20 +136,20 @@ VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
 
 Backend Deployment:
 
-Create Web Service
-Root Directory → server
-Build Command → npm install
-Start Command → node server.js
-Add all backend environment variables
+#Create Web Service
+#Root Directory → server
+#Build Command → npm install
+#Start Command → node server.js
+#Add all backend environment variables
 
 Frontend Deployment:
 
-Create Static Site
-Root Directory → client
-Build Command → npm install && npm run build
-Publish Directory → dist
-Add frontend environment variables
-```
+#Create Static Site
+#Root Directory → client
+#Build Command → npm install && npm run build
+#Publish Directory → dist
+#Add frontend environment variables
+
 
 
 ## 🔗 API Routes
@@ -171,12 +171,12 @@ Add frontend environment variables
 #Real-world deployment using Render
 
 🎯 Future Improvements
-```
-Add more AI tools
-Improve UI/UX
-Add user history tracking
-Optimize performance
-```
+
+#Add more AI tools
+#Improve UI/UX
+#Add user history tracking
+#Optimize performance
+
 ---
 
 ## 🤝 Contributing
