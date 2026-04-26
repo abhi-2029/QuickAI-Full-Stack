@@ -41,16 +41,31 @@ Users can:
 ```
 QuickAI-Full-Stack/
 │
-├── client/ # Frontend (React + Vite)
-│ ├── src/
-│ ├── package.json
+├── client/                      # Frontend (React + Vite)
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── .env
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
 │
-├── server/ # Backend (Node.js + Express)
-│ ├── controllers/
-│ ├── routes/
-│ ├── db.js
-│ ├── server.js
+├── server/                      # Backend (Node.js + Express)
+│   ├── controllers/
+│   │   └── aiController.js
+│   ├── routes/
+│   │   └── aiRoutes.js
+│   ├── db.js
+│   ├── server.js
+│   ├── .env
+│   └── package.json
 │
+├── .gitignore
 ├── README.md
 ```
 
