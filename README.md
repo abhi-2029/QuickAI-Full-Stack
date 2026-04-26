@@ -1,61 +1,75 @@
 # 🚀 QuickAI – Full Stack AI Web App
 
-QuickAI is a full-stack AI-powered web application that allows users to:
+QuickAI is a full-stack AI-powered web application that allows users to generate content instantly using artificial intelligence.
 
-* ✍️ Generate articles
-* 📝 Create blog titles
-* 🖼️ Generate images
-* 🔐 Authenticate users (Clerk)
-
-Built with a modern stack and deployed on **Vercel**.
+Users can:
+- ✍️ Generate articles  
+- 📝 Create blog titles  
+- 🖼️ Generate images  
+- 🔐 Sign in securely using authentication  
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
+- React (Vite)
+- Tailwind CSS
+- Axios
+- Clerk Authentication
 
-* React (Vite)
-* Tailwind CSS
-* Axios
-* Clerk Authentication
+### Backend
+- Node.js
+- Express.js
+- Groq API (AI text generation)
+- Clipdrop API (Image generation)
 
-### Backend (Serverless on Vercel)
+### Database & Cloud
+- Neon PostgreSQL (Database)
+- Cloudinary (Image storage)
 
-* Node.js
-* Groq API (AI text generation)
-* Serverless Functions (`/api`)
+### Deployment
+- Render (Backend + Frontend)
+
+---
+
+## 📁 Project Structure
+
 
 ---
 
 ## 📁 Project Structure
 
 ```
-QuickAI/
+QuickAI-Full-Stack/
 │
-├── client/                 # Frontend (React + Vite)
-│   ├── src/
-│   ├── package.json
+├── client/ # Frontend (React + Vite)
+│ ├── src/
+│ ├── package.json
 │
-├── api/                    # Backend (Vercel serverless)
-│   └── ai/
-│       ├── article.js
-│       ├── blog-title.js
-│       └── generate-image.js
+├── server/ # Backend (Node.js + Express)
+│ ├── controllers/
+│ ├── routes/
+│ ├── db.js
+│ ├── server.js
 │
-├── package.json            # Backend dependencies
-└── README.md
+├── README.md
 ```
+
+---
+
 
 ---
 
 ## ⚙️ Features
 
-* ✅ AI Article Generator
-* ✅ Blog Title Generator
-* ✅ Image Generator
-* ✅ Authentication with Clerk
-* ✅ Fully deployed on Vercel
+- ✅ AI Article Generator  
+- ✅ Blog Title Generator  
+- ✅ AI Image Generator  
+- ✅ Secure Authentication (Clerk)  
+- ✅ Database integration (Neon PostgreSQL)  
+- ✅ Cloud image storage (Cloudinary)  
+- ✅ Fully deployed full-stack application  
 
 ---
 
@@ -64,8 +78,8 @@ QuickAI/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/quickai.git
-cd quickai
+git clone https://github.com/abhi-2029/QuickAI-Full-Stack.git
+cd QuickAI-Full-Stack
 ```
 
 ---
@@ -73,7 +87,9 @@ cd quickai
 ### 2️⃣ Setup Backend
 
 ```bash
+cd server
 npm install
+npm run server
 ```
 
 ---
@@ -91,55 +107,77 @@ npm run dev
 ### 4️⃣ Environment Variables
 
 Create a `.env` file in root:
+Backend (server/.env)
 
 ```
-GROQ_API_KEY=your_api_key
+DATABASE_URL=your_neon_db_url
+CLERK_SECRET_KEY=your_clerk_secret
+GROQ_API_KEY=your_groq_key
+CLIPDROP_API_KEY=your_clipdrop_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_secret
 ```
-
+Create a `.env` file in root:
+Frontend (client/.env)
+```
+VITE_BASE_URL=your_backend_url
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
 ---
-
+```
 ### 5️⃣ Run Project
-
+```
 * Frontend → http://localhost:5173
 * Backend → http://localhost:3000 (if using local server)
-
 ---
+```
 
-## 🌍 Deployment (Vercel)
+## 🌍 Deployment (Render)
 
-### Steps:
+Backend Deployment
+```
+Create Web Service
+Root Directory → server
+Build Command → npm install
+Start Command → node server.js
+Add all backend environment variables
+```
+Frontend Deployment
+```
+Create Static Site
+Root Directory → client
+Build Command → npm install && npm run build
+Publish Directory → dist
+Add frontend environment variables
+```
 
-1. Push project to GitHub
-2. Import project in Vercel
-3. Set **Root Directory → client**
-4. Add Environment Variables:
-
-   ```
-   GROQ_API_KEY=your_key
-   ```
-5. Deploy 🚀
-
----
 
 ## 🔗 API Routes
+```
 
 | Route                    | Description          |
 | ------------------------ | -------------------- |
 | `/api/ai/article`        | Generate article     |
 | `/api/ai/blog-title`     | Generate blog titles |
 | `/api/ai/generate-image` | Generate image       |
-
----
+```
 
 ## 🧠 Key Learnings
+```
+#Full-stack development using React and Node.js
+#Integration of multiple AI APIs
+#Authentication and user management
+#Database handling with PostgreSQL
+#Real-world deployment using Render
+```
 
-* Serverless architecture on Vercel
-* API integration with AI models
-* Frontend-backend communication
-* Authentication handling
-
----
-
+🎯 Future Improvements
+```
+Add more AI tools
+Improve UI/UX
+Add user history tracking
+Optimize performance
+```
 ---
 
 ## 🤝 Contributing
