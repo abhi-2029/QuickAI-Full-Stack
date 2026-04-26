@@ -129,21 +129,21 @@ VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
 ```
 * Frontend → http://localhost:5173
 * Backend → http://localhost:3000 (if using local server)
----
+
 ```
 
 ## 🌍 Deployment (Render)
 
-Backend Deployment
-```
+Backend Deployment:
+
 Create Web Service
 Root Directory → server
 Build Command → npm install
 Start Command → node server.js
 Add all backend environment variables
-```
-Frontend Deployment
-```
+
+Frontend Deployment:
+
 Create Static Site
 Root Directory → client
 Build Command → npm install && npm run build
@@ -153,23 +153,22 @@ Add frontend environment variables
 
 
 ## 🔗 API Routes
-```
+
 
 | Route                    | Description          |
 | ------------------------ | -------------------- |
 | `/api/ai/article`        | Generate article     |
 | `/api/ai/blog-title`     | Generate blog titles |
 | `/api/ai/generate-image` | Generate image       |
-```
+
 
 ## 🧠 Key Learnings
-```
+
 #Full-stack development using React and Node.js
 #Integration of multiple AI APIs
 #Authentication and user management
 #Database handling with PostgreSQL
 #Real-world deployment using Render
-```
 
 🎯 Future Improvements
 ```
