@@ -1,114 +1,130 @@
 # 🚀 QuickAI – Full Stack AI Web App
 
-QuickAI is a full-stack AI-powered web application that allows users to generate content instantly using artificial intelligence.
+QuickAI is a full-stack AI-powered web application that allows users to:
 
-Users can:
-- ✍️ Generate articles  
-- 📝 Create blog titles  
-- 🖼️ Generate images  
-- 🔐 Sign in securely using authentication  
+* ✍️ **Generate articles** (with adjustable short, medium, and long configurations)
+* 📝 **Create blog titles** using AI
+* 🖼️ **Generate images** (integrating the Clipdrop API to generate real AI images directly to base64 Data URIs)
+* 🔐 **Authenticate users** via Clerk
+* 📂 **Manage & Publish creations** in a central public Dashboard and Community feed
+
+Built with a modern stack, Dockerized, configured for Kubernetes orchestrations, and ready for deployment on **Vercel** or cloud clusters.
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- React (Vite)
-- Tailwind CSS
-- Axios
-- Clerk Authentication
+* **React (Vite)**
+* **Tailwind CSS v4**
+* **Lucide Icons**
+* **Clerk Authentication**
+* **Axios & React Markdown**
 
 ### Backend
-- Node.js
-- Express.js
-- Groq API (AI text generation)
-- Clipdrop API (Image generation)
-
-### Database & Cloud
-- Neon PostgreSQL (Database)
-- Cloudinary (Image storage)
-
-### Deployment
-- Render (Backend + Frontend)
-
----
-
+* **Node.js & Express**
+* **Groq API & Llama Models** (for text generation)
+* **Clipdrop API** (for real AI image generation)
+* **Neon PostgreSQL Database** (serverless database via `@neondatabase/serverless`)
+* **Cloudinary** (for secure media hosting)
 
 ---
 
 ## 📁 Project Structure
 
-```
-QuickAI-Full-Stack/
-│
-├── client/                      # Frontend (React + Vite)
-│   ├── public/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── .env
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-│
-├── server/                      # Backend (Node.js + Express)
-│   ├── controllers/
-│   │   └── aiController.js
-│   ├── routes/
-│   │   └── aiRoutes.js
-│   ├── db.js
-│   ├── server.js
-│   ├── .env
+```text
+QuickAI/
+├── client/                 # Frontend (React + Vite)
+│   ├── Dockerfile          # Frontend container definition
+│   ├── .dockerignore
+│   ├── src/                # React source files (components, pages, assets)
 │   └── package.json
 │
-├── .gitignore
-├── README.md
+├── server/                 # Backend (Node.js + Express)
+│   ├── Dockerfile          # Backend container definition
+│   ├── .dockerignore
+│   ├── configs/            # Database and Cloudinary configurations
+│   ├── controllers/        # Express request logic handlers
+│   ├── middlewares/        # Authentication middlewares (Clerk)
+│   ├── routes/             # API route definitions
+│   └── package.json
+│
+├── k8s/                    # Kubernetes deployment manifests
+│   ├── namespace.yaml      # Cluster namespace config
+│   ├── secrets.yaml        # API secrets template
+│   ├── configmap.yaml      # Non-sensitive environment variables
+│   ├── backend-deployment.yaml
+│   ├── backend-service.yaml
+│   ├── frontend-deployment.yaml
+│   └── frontend-service.yaml
+│
+├── docker-compose.yml      # Local container orchestration with hot reloading
+├── package.json            # Root dependency configuration
+└── README.md               # Project documentation
 ```
 
 ---
 
-
----
-
-## ⚙️ Features
-
-- ✅ AI Article Generator  
-- ✅ Blog Title Generator  
-- ✅ AI Image Generator  
-- ✅ Secure Authentication (Clerk)  
-- ✅ Database integration (Neon PostgreSQL)  
-- ✅ Cloud image storage (Cloudinary)  
-- ✅ Fully deployed full-stack application  
-
----
-
-## 🚀 Getting Started (Local Setup)
+## ⚙️ Getting Started (Local Setup)
 
 ### 1️⃣ Clone the Repository
-
 ```bash
 git clone https://github.com/abhi-2029/QuickAI-Full-Stack.git
 cd QuickAI-Full-Stack
 ```
 
----
+### 2️⃣ Configure Environment Variables
 
-### 2️⃣ Setup Backend
+Create a `.env` file in the `/server` folder:
+```env
+DATABASE_URL=your_postgres_neon_connection_string
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+GROQ_API_KEY=your_groq_api_key
+CLIPDROP_API_KEY=your_clipdrop_api_key
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+```
 
-```bash
-cd server
-npm install
-npm run server
+Create a `.env` file in the `/client` folder:
+```env
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+VITE_BASE_URL=http://localhost:3000
 ```
 
 ---
 
-### 3️⃣ Setup Frontend
+## 🐳 Running with Docker (Recommended)
 
+QuickAI is fully Dockerized for simple, single-command startup. It includes live volume mounting so that code changes on your host machine will **hot reload** instantly inside the containers.
+
+Make sure you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed, then run the following in the project root:
+
+```bash
+# Build and start all services (frontend + backend)
+docker compose up --build
+```
+* **Frontend** will be accessible at: `http://localhost:5173`
+* **Backend** will be accessible at: `http://localhost:3000`
+
+To stop the containers:
+```bash
+docker compose down
+```
+
+---
+
+## ⚙️ Manual Local Execution (Without Docker)
+
+### 1️⃣ Run the Backend
+```bash
+cd server
+npm install
+npm start
+```
+
+### 2️⃣ Run the Frontend
 ```bash
 cd client
 npm install
@@ -117,100 +133,62 @@ npm run dev
 
 ---
 
-### 4️⃣ Environment Variables
+## ☸️ Deploying to Kubernetes
 
-Create a `.env` file in root:
-Backend (server/.env)
+Kubernetes manifests are located under the `/k8s` directory. They configure high-availability pod replicas, internal routing, LoadBalancer endpoints, and ConfigMaps/Secrets.
 
+Ensure you have a running cluster (Minikube, EKS, GKE, etc.) and `kubectl` configured:
+
+```bash
+# 1. Create the dedicated quickai namespace
+kubectl apply -f k8s/namespace.yaml
+
+# 2. Open k8s/secrets.yaml and replace the placeholder base64 secrets with your credentials
+# (Encode secrets in base64: echo -n "secret_value" | base64)
+
+# 3. Apply the manifests
+kubectl apply -f k8s/
 ```
-DATABASE_URL=your_neon_db_url
-CLERK_SECRET_KEY=your_clerk_secret
-GROQ_API_KEY=your_groq_key
-CLIPDROP_API_KEY=your_clipdrop_key
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_secret
+
+To monitor the deployments:
+```bash
+kubectl get all -n quickai
 ```
-Create a `.env` file in root:
-Frontend (client/.env)
-```
-VITE_BASE_URL=your_backend_url
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
+
 ---
-```
-### 5️⃣ Run Project
-```
-* Frontend → http://localhost:5173
-* Backend → http://localhost:3000 (if using local server)
 
-```
+## 🌍 Production Deployment (Vercel)
 
-## 🌍 Deployment (Render)
+### Backend Deployment:
+1. Set the **Root Directory** to `server`.
+2. Add your environment variables (`DATABASE_URL`, `CLERK_SECRET_KEY`, `GROQ_API_KEY`, `CLIPDROP_API_KEY`, etc.) in Vercel settings.
+3. Deploy 🚀
 
-Backend Deployment:
+### Frontend Deployment:
+1. Set the **Root Directory** to `client`.
+2. Add the environment variables (`VITE_CLERK_PUBLISHABLE_KEY` and `VITE_BASE_URL` pointing to your deployed backend URL).
+3. Deploy 🚀
 
-- Create Web Service
-- Root Directory → server
-- Build Command → npm install
-- Start Command → node server.js
-- Add all backend environment variables
-
-Frontend Deployment:
-
-- Create Static Site
-- Root Directory → client
-- Build Command → npm install && npm run build
-- Publish Directory → dist
-- Add frontend environment variables
-
-
+---
 
 ## 🔗 API Routes
 
-
-| Route                    | Description          |
-| ------------------------ | -------------------- |
-| `/api/ai/article`        | Generate article     |
-| `/api/ai/blog-title`     | Generate blog titles |
-| `/api/ai/generate-image` | Generate image       |
-
-
-## 🧠 Key Learnings
-
-- Full-stack development using React and Node.js
-- Integration of multiple AI APIs
-- Authentication and user management
-- Database handling with PostgreSQL
-- Real-world deployment using Render
-
-🎯 Future Improvements
-
-- Add more AI tools
-- Improve UI/UX
-- Add user history tracking
-- Optimize performance
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome. For major changes, please open an issue first.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+| Route | Method | Description | Authentication |
+| :--- | :--- | :--- | :--- |
+| `/api/ai/article` | `POST` | Generate articles (Short, Medium, Long) | Required |
+| `/api/ai/blog-title` | `POST` | Generate 5 blog titles | Required |
+| `/api/ai/image` | `POST` | Generate real AI images (via Clipdrop) | Required |
+| `/api/ai/remove-background`| `POST` | Remove image background | Required |
+| `/api/ai/remove-object` | `POST` | Remove designated objects from image | Required |
+| `/api/ai/resume-review` | `POST` | Review resumes (.pdf format) | Required |
+| `/api/user/get-user-creations`| `GET` | Get log of creations by user | Required |
+| `/api/user/get-published-creations`| `GET` | Get public creations feed | Required |
+| `/api/user/toggle-like-creation`| `POST` | Like or Unlike a creation | Required |
 
 ---
 
 ## 👨‍💻 Author
 
 **Abhishek Ranjan**
-
 * GitHub: [Github](https://github.com/abhi-2029)
 * LinkedIn: [Linkedin](https://www.linkedin.com/in/abhishekranjan20/)
-
----
-
-⭐ If you like this project, give it a star!
