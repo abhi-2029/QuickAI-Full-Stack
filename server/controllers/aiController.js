@@ -196,10 +196,16 @@ export const generateImage = async (req, res) => {
   console.log("🔥 HIT IMAGE API");
 
   try {
-    const { prompt } = req.body;
+    const userId = req.auth?.userId;
+    const { prompt, publish } = req.body;
 
     // ✅ FORCE WORKING IMAGE
     const content = `https://picsum.photos/seed/${encodeURIComponent(prompt)}/800/600`;
+
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type, publish)
+      VALUES (${userId}, ${prompt}, ${content}, 'image', ${publish ?? false})
+    `;
 
     return res.json({ success: true, content });
 
@@ -212,7 +218,7 @@ export const generateImage = async (req, res) => {
 
 export const removeImageBackground = async (req, res)=>{
     try {
-        const { userId } = req.auth();
+        const { userId } = req.auth;
         const image = req.file;
         const plan = req.plan;
 
@@ -242,7 +248,7 @@ export const removeImageBackground = async (req, res)=>{
 
 export const removeImageObject = async (req, res)=>{
     try {
-        const { userId } = req.auth();
+        const { userId } = req.auth;
         const { object } = req.body;
         const image = req.file;
         const plan = req.plan;
@@ -271,7 +277,7 @@ export const removeImageObject = async (req, res)=>{
 
 export const resumeReview = async (req, res)=>{
     try {
-        const { userId } = req.auth();
+        const { userId } = req.auth;
         const resume = req.file;
         const plan = req.plan;
 
