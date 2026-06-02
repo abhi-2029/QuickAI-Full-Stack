@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quickai-config
+  namespace: quickai
+data:
+  VITE_BASE_URL: http://backend-service:3000
+  VITE_CLERK_PUBLISHABLE_KEY: pk_test_bG92aW5nLXdvbWJhdC05MS5jbGVyay5hY2NvdW50cy5kZXYk
+  CLOUDINARY_CLOUD_NAME: djabowqr3
