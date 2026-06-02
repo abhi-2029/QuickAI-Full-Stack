@@ -199,9 +199,32 @@ export const generateImage = async (req, res) => {
     const userId = req.auth?.userId;
     const { prompt, publish } = req.body;
 
-    // ✅ FORCE WORKING IMAGE
-    const content = `https://picsum.photos/seed/${encodeURIComponent(prompt)}/800/600`;
+    const apiKey = process.env.CLIPDROP_API_KEY;
+    if (!apiKey) {
+      return res.json({ success: false, message: "Clipdrop API Key is missing on the server" });
+    }
 
+    // 1. Generate image using Clipdrop
+    const form = new FormData();
+    form.append('prompt', prompt);
+
+    const response = await axios.post('https://clipdrop-api.co/text-to-image/v1', form, {
+      headers: {
+        ...form.getHeaders(),
+        'x-api-key': apiKey,
+      },
+      responseType: 'arraybuffer',
+    });
+
+    // 2. Convert binary image buffer to base64 Data URI
+    const base64Image = Buffer.from(response.data, 'binary').toString('base64');
+    const dataURI = `data:image/png;base64,${base64Image}`;
+
+    // 3. Upload base64 image data to Cloudinary
+    const uploadResponse = await cloudinary.uploader.upload(dataURI);
+    const content = uploadResponse.secure_url;
+
+    // 4. Save to SQL database
     await sql`
       INSERT INTO creations (user_id, prompt, content, type, publish)
       VALUES (${userId}, ${prompt}, ${content}, 'image', ${publish ?? false})
