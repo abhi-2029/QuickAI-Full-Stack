@@ -26,25 +26,29 @@ const Testimonial = () => {
     ]
 
     return (
-        <div className='px-4 sm:px-20 xl:px-32 py-24'>
-            <div className='text-center'>
-                <h2 className='text-slate-700 text-[42px] font-semibold'>Loved by Creators</h2>
-                <p className='text-gray-500 max-w-lg mx-auto'>Don't just take our word for it. Here's what our users are saying.</p>
+        <div className='px-6 sm:px-20 xl:px-32 py-28 bg-slate-50/20 border-t border-b border-slate-100/50'>
+            <div className='text-center max-w-2xl mx-auto'>
+                <h2 className='text-slate-800 text-3xl sm:text-4xl font-extrabold tracking-tight'>Loved by Creators</h2>
+                <p className='text-slate-500 mt-4 text-sm sm:text-base leading-relaxed'>Don't just take our word for it. Here's what our users are saying.</p>
             </div>
-            <div className='flex flex-wrap mt-10 justify-center'>
+            <div className='flex flex-wrap mt-14 justify-center gap-6 sm:gap-8'>
                 {dummyTestimonialData.map((testimonial, index) => (
-                    <div key={index} className='p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition duration-300 cursor-pointer'>
-                        <div className="flex items-center gap-1">
-                            {Array(5).fill(0).map((_, index)=> (<img key={index} src={index < testimonial.rating ? assets.star_icon : assets.star_dull_icon} className='w-4 h-4' alt="star"/>))}
+                    <div key={index} className='p-8 w-full max-w-[320px] rounded-2xl bg-white border border-slate-100/90 shadow-[0_8px_30px_rgb(0,0,0,0.01)] hover:shadow-lg hover:shadow-slate-100/40 hover:-translate-y-1 transition duration-300 cursor-pointer flex flex-col justify-between'>
+                        <div>
+                          <div className="flex items-center gap-0.5">
+                              {Array(5).fill(0).map((_, idx)=> (<img key={idx} src={idx < testimonial.rating ? assets.star_icon : assets.star_dull_icon} className='w-4.5 h-4.5' alt="star"/>))}
+                          </div>
+                          <p className='text-slate-500 text-sm leading-relaxed my-5 italic'>"{testimonial.content}"</p>
                         </div>
-                        <p className='text-gray-500 text-sm my-5'>"{testimonial.content}"</p>
-                        <hr className='mb-5 border-gray-300' />
-                        <div className='flex items-center gap-4'>
-                            <img src={testimonial.image} className='w-12 object-contain rounded-full' alt='' />
-                            <div className='text-sm text-gray-600'>
-                                <h3 className='font-medium'>{testimonial.name}</h3>
-                                <p className='text-xs text-gray-500'>{testimonial.title}</p>
-                            </div>
+                        <div>
+                          <hr className='mb-5 border-slate-100' />
+                          <div className='flex items-center gap-3.5'>
+                              <img src={testimonial.image} className='w-10 h-10 object-cover rounded-full border border-slate-100 shadow-sm' alt='' />
+                              <div className='min-w-0'>
+                                  <h3 className='font-bold text-slate-800 text-sm truncate'>{testimonial.name}</h3>
+                                  <p className='text-xs text-slate-400 font-medium mt-0.5 truncate'>{testimonial.title}</p>
+                              </div>
+                          </div>
                         </div>
                     </div>
                 ))}
@@ -53,4 +57,4 @@ const Testimonial = () => {
     )
 }
 
-export default Testimonial
+export default Testimonial

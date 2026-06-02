@@ -36,53 +36,63 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <div className='h-full overflow-y-scroll p-6'>
-      <div className='flex justify-start gap-4 flex-wrap'>
+    <div className='h-full overflow-y-scroll p-6 bg-slate-50/30 flex flex-col gap-6'>
+      <div className='flex flex-col gap-1'>
+        <h1 className='text-2xl font-bold text-slate-800 tracking-tight'>Welcome to QuickAI</h1>
+        <p className='text-sm text-slate-500'>Overview of your workspace, creations, and usage details</p>
+      </div>
+
+      <div className='flex justify-start gap-6 flex-wrap'>
         {/* Total Creations Card  */}
-        <div className='flex justify-between items-center w-72 p-4 px-6 bg-white rounded-xl border border-gray-200'>
+        <div className='flex justify-between items-center w-72 p-5 bg-white rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 hover:shadow-md hover:shadow-slate-100/50'>
             <div className='text-slate-600'>
-              <p className='text-sm'>Total Creations</p>
-              <h2 className='text-xl font-semibold'>{creations.length}</h2>
+              <p className='text-xs font-semibold text-slate-400 uppercase tracking-wider'>Total Creations</p>
+              <h2 className='text-3xl font-bold text-slate-800 mt-1'>{creations.length}</h2>
             </div>
-            <div className='w-10 h-10 rounded-lg bg-gradient-to-br from-[#3588F2] to-[#0BB0D7] text-white flex justify-center items-center'>
-              <Sparkles className='w-5 text-white' />
+            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex justify-center items-center shadow-lg shadow-blue-500/10'>
+              <Sparkles className='w-5 h-5 text-white' />
             </div>
         </div>
 
         {/* Active Plan Card  */}
-        <div className='flex justify-between items-center w-72 p-4 px-6 bg-white rounded-xl border border-gray-200'>
+        <div className='flex justify-between items-center w-72 p-5 bg-white rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 hover:shadow-md hover:shadow-slate-100/50'>
             <div className='text-slate-600'>
-              <p className='text-sm'>Active Plan</p>
-              <h2 className='text-xl font-semibold'>
+              <p className='text-xs font-semibold text-slate-400 uppercase tracking-wider'>Active Plan</p>
+              <h2 className='text-3xl font-bold text-slate-800 mt-1'>
                 <Protect plan='premium' fallback="Free">Premium</Protect>
               </h2>
             </div>
-            <div className='w-10 h-10 rounded-lg bg-gradient-to-br from-[#FF61C5] to-[#9E53EE] text-white flex justify-center items-center'>
-              <Gem className='w-5 text-white' />
+            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white flex justify-center items-center shadow-lg shadow-purple-500/10'>
+              <Gem className='w-5 h-5 text-white' />
             </div>
         </div>
-
       </div>
 
-    {
-      loading ? 
-      (
-        <div className='flex justify-center items-center h-3/4'>
-          <div className='animate-spin rounded-full h-11 w-11 border-3 border-purple-500 border-t-transparent'></div>
-        </div>
-      )
-      :
-      (
-        <div className='space-y-3'>
-          <p className='mt-6 mb-4'>Recent Creations</p>
-          {
-            creations.map((item)=> <CreationItem key={item.id} item={item}/>)
-          }
-        </div>
-      )
-    }
-    
-
+      {
+        loading ? 
+        (
+          <div className='flex-1 flex justify-center items-center min-h-[300px]'>
+            <div className='animate-spin rounded-full h-8 w-8 border-2 border-indigo-600 border-t-transparent'></div>
+          </div>
+        )
+        :
+        (
+          <div className='space-y-4'>
+            <div className='border-b border-slate-100 pb-2 mt-4'>
+              <h2 className='text-lg font-bold text-slate-700 tracking-tight'>Recent Creations</h2>
+            </div>
+            <div className='space-y-3 pb-6'>
+              {creations.length > 0 ? (
+                creations.map((item)=> <CreationItem key={item.id} item={item}/>)
+              ) : (
+                <div className='p-12 text-center bg-white rounded-2xl border border-slate-100 text-slate-400 font-medium'>
+                  No creations yet. Get started by selecting a tool from the sidebar!
+                </div>
+              )}
+            </div>
+          </div>
+        )
+      }
     </div>
   )
 }
