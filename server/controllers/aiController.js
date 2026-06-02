@@ -216,15 +216,11 @@ export const generateImage = async (req, res) => {
       responseType: 'arraybuffer',
     });
 
-    // 2. Convert binary image buffer to base64 Data URI
+    // 2. Convert binary image buffer to base64 Data URI (bypassing Cloudinary to avoid 403 errors)
     const base64Image = Buffer.from(response.data, 'binary').toString('base64');
-    const dataURI = `data:image/png;base64,${base64Image}`;
+    const content = `data:image/png;base64,${base64Image}`;
 
-    // 3. Upload base64 image data to Cloudinary
-    const uploadResponse = await cloudinary.uploader.upload(dataURI);
-    const content = uploadResponse.secure_url;
-
-    // 4. Save to SQL database
+    // 3. Save to SQL database
     await sql`
       INSERT INTO creations (user_id, prompt, content, type, publish)
       VALUES (${userId}, ${prompt}, ${content}, 'image', ${publish ?? false})
